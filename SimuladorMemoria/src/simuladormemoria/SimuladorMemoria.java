@@ -20,6 +20,7 @@ public class SimuladorMemoria {
         // TODO code application logic here
         Central c = new Central();
         c.show();
+        System.out.println("");
         
     }
     
