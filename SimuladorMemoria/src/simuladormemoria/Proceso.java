@@ -7,21 +7,21 @@ package simuladormemoria;
 public class Proceso 
 {
     
-    private int id;
+    private String id;
     private int requerimiento; //preguntar a qué se refiere.
     private int prioridad;
 
-    public Proceso(int id, int requerimiento, int prioridad) {
+    public Proceso(String id, int requerimiento, int prioridad) {
         this.id = id;
         this.requerimiento = requerimiento;
         this.prioridad = prioridad;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
