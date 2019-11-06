@@ -8,10 +8,10 @@ public class Proceso
 {
     
     private int id;
-    private String requerimiento; //preguntar a qué se refiere.
+    private int requerimiento; //preguntar a qué se refiere.
     private int prioridad;
 
-    public Proceso(int id, String requerimiento, int prioridad) {
+    public Proceso(int id, int requerimiento, int prioridad) {
         this.id = id;
         this.requerimiento = requerimiento;
         this.prioridad = prioridad;
@@ -25,11 +25,11 @@ public class Proceso
         this.id = id;
     }
 
-    public String getRequerimiento() {
+    public int getRequerimiento() {
         return requerimiento;
     }
 
-    public void setRequerimiento(String requerimiento) {
+    public void setRequerimiento(int requerimiento) {
         this.requerimiento = requerimiento;
     }
 
