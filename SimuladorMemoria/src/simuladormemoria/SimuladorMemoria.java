@@ -5,7 +5,7 @@
  */
 package simuladormemoria;
 
-import GUI.Central;
+import GUI.Central1;
 
 /**
  *
@@ -18,7 +18,7 @@ public class SimuladorMemoria {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        Central c = new Central();
+        Central1 c = new Central1();
         c.show();
         System.out.println("Ale se la come");
         

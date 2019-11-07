@@ -9,12 +9,12 @@ package GUI;
  *
  * @author Ale
  */
-public class Central extends javax.swing.JFrame {
+public class Central1 extends javax.swing.JFrame {
 
     /**
      * Creates new form Central
      */
-    public Central() {
+    public Central1() {
         initComponents();
     }
 
@@ -30,39 +30,43 @@ public class Central extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
+        buttonGroup4 = new javax.swing.ButtonGroup();
+        buttonGroup5 = new javax.swing.ButtonGroup();
+        buttonGroup6 = new javax.swing.ButtonGroup();
+        btnAceptar = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        rbtnFetchPolicyDemand = new javax.swing.JRadioButton();
+        rbtnFetchPolicyPrepaging = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        rbtnPlacementPolicyfirstA = new javax.swing.JRadioButton();
+        rbtnPlacementPoliciyNextA = new javax.swing.JRadioButton();
         jPanel3 = new javax.swing.JPanel();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
-        jRadioButton7 = new javax.swing.JRadioButton();
-        jRadioButton8 = new javax.swing.JRadioButton();
-        jRadioButton9 = new javax.swing.JRadioButton();
+        rbtnLRU = new javax.swing.JRadioButton();
+        rbtnFIFO = new javax.swing.JRadioButton();
+        rbtnLFU = new javax.swing.JRadioButton();
+        rbtnMRU = new javax.swing.JRadioButton();
+        rbtnSecondChance = new javax.swing.JRadioButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jRadioButton14 = new javax.swing.JRadioButton();
-        jRadioButton15 = new javax.swing.JRadioButton();
+        rbtnFixed = new javax.swing.JRadioButton();
+        rbtnVariable = new javax.swing.JRadioButton();
+        jTextFieldResidentSet = new javax.swing.JTextField();
         jPanel5 = new javax.swing.JPanel();
-        jRadioButton10 = new javax.swing.JRadioButton();
-        jRadioButton11 = new javax.swing.JRadioButton();
+        rbtnReplacementScopeGlobal = new javax.swing.JRadioButton();
+        rbtnReplacementScopeLocal = new javax.swing.JRadioButton();
         jPanel6 = new javax.swing.JPanel();
-        jRadioButton12 = new javax.swing.JRadioButton();
-        jRadioButton13 = new javax.swing.JRadioButton();
+        rbtnClaningDemand = new javax.swing.JRadioButton();
+        rbtnCleaningPrecleaning = new javax.swing.JRadioButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldMultiprogramming = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldCantMemoriaFisica = new javax.swing.JTextField();
+        jTextFieldCantMemoriaVirtual = new javax.swing.JTextField();
+        jTextFieldTamanoPagina = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -75,23 +79,26 @@ public class Central extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Aceptar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptar.setText("Aceptar");
+        btnAceptar.setName(""); // NOI18N
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAceptarActionPerformed(evt);
             }
         });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Fetch policy ", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jRadioButton1.setText("Demand");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup3.add(rbtnFetchPolicyDemand);
+        rbtnFetchPolicyDemand.setText("Demand");
+        rbtnFetchPolicyDemand.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                rbtnFetchPolicyDemandActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Prepaging");
+        buttonGroup3.add(rbtnFetchPolicyPrepaging);
+        rbtnFetchPolicyPrepaging.setText("Prepaging");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -99,25 +106,27 @@ public class Central extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(jRadioButton1)
+                .addComponent(rbtnFetchPolicyDemand)
                 .addGap(70, 70, 70)
-                .addComponent(jRadioButton2)
+                .addComponent(rbtnFetchPolicyPrepaging)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(rbtnFetchPolicyDemand)
+                    .addComponent(rbtnFetchPolicyPrepaging))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Placement policy", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jRadioButton3.setText("First available");
+        buttonGroup1.add(rbtnPlacementPolicyfirstA);
+        rbtnPlacementPolicyfirstA.setText("First available");
 
-        jRadioButton4.setText("Next available");
+        buttonGroup1.add(rbtnPlacementPoliciyNextA);
+        rbtnPlacementPoliciyNextA.setText("Next available");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -125,37 +134,42 @@ public class Central extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(48, 48, 48)
-                .addComponent(jRadioButton3)
+                .addComponent(rbtnPlacementPolicyfirstA)
                 .addGap(36, 36, 36)
-                .addComponent(jRadioButton4)
-                .addContainerGap(374, Short.MAX_VALUE))
+                .addComponent(rbtnPlacementPoliciyNextA)
+                .addContainerGap(494, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton4)))
+                    .addComponent(rbtnPlacementPolicyfirstA)
+                    .addComponent(rbtnPlacementPoliciyNextA)))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Replacement policy", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jRadioButton5.setText("LRU");
+        buttonGroup2.add(rbtnLRU);
+        rbtnLRU.setText("LRU");
 
-        jRadioButton6.setText("FIFO");
-        jRadioButton6.setToolTipText("");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup2.add(rbtnFIFO);
+        rbtnFIFO.setText("FIFO");
+        rbtnFIFO.setToolTipText("");
+        rbtnFIFO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                rbtnFIFOActionPerformed(evt);
             }
         });
 
-        jRadioButton7.setText("LFU");
+        buttonGroup2.add(rbtnLFU);
+        rbtnLFU.setText("LFU");
 
-        jRadioButton8.setText("MRU");
+        buttonGroup2.add(rbtnMRU);
+        rbtnMRU.setText("MRU");
 
-        jRadioButton9.setText("Second-chance");
+        buttonGroup2.add(rbtnSecondChance);
+        rbtnSecondChance.setText("Second-chance");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -163,75 +177,84 @@ public class Central extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(52, 52, 52)
-                .addComponent(jRadioButton5)
+                .addComponent(rbtnLRU)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton6)
+                .addComponent(rbtnFIFO)
                 .addGap(47, 47, 47)
-                .addComponent(jRadioButton7)
+                .addComponent(rbtnLFU)
                 .addGap(18, 18, 18)
-                .addComponent(jRadioButton8)
+                .addComponent(rbtnMRU)
                 .addGap(26, 26, 26)
-                .addComponent(jRadioButton9)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addComponent(rbtnSecondChance)
+                .addContainerGap(288, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6)
-                    .addComponent(jRadioButton7)
-                    .addComponent(jRadioButton8)
-                    .addComponent(jRadioButton9))
+                    .addComponent(rbtnLRU)
+                    .addComponent(rbtnFIFO)
+                    .addComponent(rbtnLFU)
+                    .addComponent(rbtnMRU)
+                    .addComponent(rbtnSecondChance))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Resident Set Management", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jLabel2.setText("Size");
+        jLabel2.setText("Size:");
 
-        jRadioButton14.setText("Fixed");
+        buttonGroup4.add(rbtnFixed);
+        rbtnFixed.setText("Fixed");
+        rbtnFixed.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnFixedActionPerformed(evt);
+            }
+        });
 
-        jRadioButton15.setText("Variable");
+        buttonGroup4.add(rbtnVariable);
+        rbtnVariable.setText("Variable");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(44, 44, 44)
                 .addComponent(jLabel2)
-                .addGap(129, 129, 129)
-                .addComponent(jRadioButton14)
+                .addGap(18, 18, 18)
+                .addComponent(jTextFieldResidentSet, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(rbtnFixed)
                 .addGap(61, 61, 61)
-                .addComponent(jRadioButton15)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(rbtnVariable)
+                .addContainerGap(402, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(16, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jRadioButton14)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(rbtnFixed)
+                    .addComponent(rbtnVariable)
+                    .addComponent(jTextFieldResidentSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2))
                 .addContainerGap())
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jRadioButton15)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Replacement scope "));
 
-        jRadioButton10.setText("Global");
-        jRadioButton10.addActionListener(new java.awt.event.ActionListener() {
+        buttonGroup5.add(rbtnReplacementScopeGlobal);
+        rbtnReplacementScopeGlobal.setText("Global");
+        rbtnReplacementScopeGlobal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton10ActionPerformed(evt);
+                rbtnReplacementScopeGlobalActionPerformed(evt);
             }
         });
 
-        jRadioButton11.setText("Local");
+        buttonGroup5.add(rbtnReplacementScopeLocal);
+        rbtnReplacementScopeLocal.setText("Local");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -240,24 +263,26 @@ public class Central extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(29, 29, 29)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton11)
-                    .addComponent(jRadioButton10))
+                    .addComponent(rbtnReplacementScopeLocal)
+                    .addComponent(rbtnReplacementScopeGlobal))
                 .addContainerGap(174, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jRadioButton10)
+                .addComponent(rbtnReplacementScopeGlobal)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton11)
+                .addComponent(rbtnReplacementScopeLocal)
                 .addContainerGap())
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Cleaning policy"));
 
-        jRadioButton12.setText("Demand");
+        buttonGroup6.add(rbtnClaningDemand);
+        rbtnClaningDemand.setText("Demand");
 
-        jRadioButton13.setText("Pre-cleaning");
+        buttonGroup6.add(rbtnCleaningPrecleaning);
+        rbtnCleaningPrecleaning.setText("Pre-cleaning");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -266,16 +291,16 @@ public class Central extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton13)
-                    .addComponent(jRadioButton12))
+                    .addComponent(rbtnCleaningPrecleaning)
+                    .addComponent(rbtnClaningDemand))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jRadioButton12)
+                .addComponent(rbtnClaningDemand)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, Short.MAX_VALUE)
-                .addComponent(jRadioButton13)
+                .addComponent(rbtnCleaningPrecleaning)
                 .addContainerGap())
         );
 
@@ -283,7 +308,7 @@ public class Central extends javax.swing.JFrame {
 
         jLabel1.setText("Degree of Multiprogramming:");
 
-        jTextField1.setText("##");
+        jTextFieldMultiprogramming.setText("##");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -293,7 +318,7 @@ public class Central extends javax.swing.JFrame {
                 .addGap(42, 42, 42)
                 .addComponent(jLabel1)
                 .addGap(38, 38, 38)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jTextFieldMultiprogramming, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -302,7 +327,7 @@ public class Central extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldMultiprogramming, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -320,19 +345,19 @@ public class Central extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(134, 134, 134)
-                        .addComponent(jTextField4))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(67, 67, 67)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(80, 80, 80)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(116, 116, 116)
+                        .addComponent(jTextFieldCantMemoriaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5))
+                        .addGap(103, 103, 103)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldTamanoPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldCantMemoriaVirtual, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
@@ -340,16 +365,16 @@ public class Central extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCantMemoriaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldCantMemoriaVirtual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 8, Short.MAX_VALUE))
+                    .addComponent(jTextFieldTamanoPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
 
         jLabel6.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
@@ -414,13 +439,13 @@ public class Central extends javax.swing.JFrame {
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jButton1))
+                                .addComponent(btnAceptar))
                             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel6)))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,7 +469,7 @@ public class Central extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnAceptar)
                 .addGap(8, 8, 8))
         );
 
@@ -463,21 +488,41 @@ public class Central extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        
+        boolean fetchpolicy;
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+        
+        if(rbtnFetchPolicyPrepaging.isSelected()){
+            System.out.println("hola");
+            
+        }
+        else{
+            if(rbtnFetchPolicyDemand.isSelected()){
+                System.out.println("no");
+            }
+                    
+        }
+          
+        
+        
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+    private void rbtnFetchPolicyDemandActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFetchPolicyDemandActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
+    }//GEN-LAST:event_rbtnFetchPolicyDemandActionPerformed
 
-    private void jRadioButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton10ActionPerformed
+    private void rbtnFIFOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFIFOActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton10ActionPerformed
+    }//GEN-LAST:event_rbtnFIFOActionPerformed
+
+    private void rbtnReplacementScopeGlobalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnReplacementScopeGlobalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnReplacementScopeGlobalActionPerformed
+
+    private void rbtnFixedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnFixedActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rbtnFixedActionPerformed
 
     /**
      * @param args the command line arguments
@@ -496,29 +541,33 @@ public class Central extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Central.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Central1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Central.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Central1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Central.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Central1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Central.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Central1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Central().setVisible(true);
+                new Central1().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAceptar;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JButton jButton1;
+    private javax.swing.ButtonGroup buttonGroup4;
+    private javax.swing.ButtonGroup buttonGroup5;
+    private javax.swing.ButtonGroup buttonGroup6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -540,25 +589,26 @@ public class Central extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton10;
-    private javax.swing.JRadioButton jRadioButton11;
-    private javax.swing.JRadioButton jRadioButton12;
-    private javax.swing.JRadioButton jRadioButton13;
-    private javax.swing.JRadioButton jRadioButton14;
-    private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
-    private javax.swing.JRadioButton jRadioButton7;
-    private javax.swing.JRadioButton jRadioButton8;
-    private javax.swing.JRadioButton jRadioButton9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextFieldCantMemoriaFisica;
+    private javax.swing.JTextField jTextFieldCantMemoriaVirtual;
+    private javax.swing.JTextField jTextFieldMultiprogramming;
+    private javax.swing.JTextField jTextFieldResidentSet;
+    private javax.swing.JTextField jTextFieldTamanoPagina;
+    private javax.swing.JRadioButton rbtnClaningDemand;
+    private javax.swing.JRadioButton rbtnCleaningPrecleaning;
+    private javax.swing.JRadioButton rbtnFIFO;
+    private javax.swing.JRadioButton rbtnFetchPolicyDemand;
+    private javax.swing.JRadioButton rbtnFetchPolicyPrepaging;
+    private javax.swing.JRadioButton rbtnFixed;
+    private javax.swing.JRadioButton rbtnLFU;
+    private javax.swing.JRadioButton rbtnLRU;
+    private javax.swing.JRadioButton rbtnMRU;
+    private javax.swing.JRadioButton rbtnPlacementPoliciyNextA;
+    private javax.swing.JRadioButton rbtnPlacementPolicyfirstA;
+    private javax.swing.JRadioButton rbtnReplacementScopeGlobal;
+    private javax.swing.JRadioButton rbtnReplacementScopeLocal;
+    private javax.swing.JRadioButton rbtnSecondChance;
+    private javax.swing.JRadioButton rbtnVariable;
     // End of variables declaration//GEN-END:variables
 }
