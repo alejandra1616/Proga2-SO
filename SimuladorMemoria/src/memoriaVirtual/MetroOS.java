@@ -725,9 +725,15 @@ public class MetroOS extends javax.swing.JFrame {
         int tamañoMemoria = Integer.parseInt(fieldMemoriaPrincipal.getText());
         int tamañoSecundario = Integer.parseInt(fieldMemoriaSecundaria.getText());
         int tamañoPagina = Integer.parseInt(fieldPagina.getText());
+        boolean placementPolicyFirst = false; //--------------------------------------------------------------------------
+        boolean fetchPolicy = true; //--------------------------------------------------------------------------
+        boolean cleaningPolicy = true; //--------------------------------------------------------------------------
+        boolean residentSetFixed = true; //--------------------------------------------------------------------------
+        boolean replacementScopeGlobal = true; //--------------------------------------------------------------------------
         if ((tamañoMemoria % 2) == 0 && (tamañoSecundario % 2) == 0 && (tamañoPagina % 2) == 0) {
             if (tamañoMemoria > tamañoPagina) {
-                memoria = new Memoria(tamañoMemoria, tamañoSecundario, tamañoPagina, textArea);
+                memoria = new Memoria(tamañoMemoria, tamañoSecundario, tamañoPagina, placementPolicyFirst,
+                        fetchPolicy, cleaningPolicy, residentSetFixed, replacementScopeGlobal, textArea);
             } else {
                 // tamaño de pagina mayor que la memoria
             }

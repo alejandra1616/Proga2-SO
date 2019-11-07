@@ -28,9 +28,15 @@ public class Memoria {
     private Pagina almacenamiento[];
     private int marcosDisponiblesAlmacenamiento[];
     private int contadorDisponiblesAlmacenamiento;
+    private boolean placementPolicyFirst;
+    private boolean fetchPolicy;
+    private boolean cleaningPolicy;
+    private boolean residentSetFixed;
+    private boolean replacementScopeGlobal;
     private JTextArea textArea;
     
-    public Memoria(int memoriaPrincipalTotal, int memoriaSecundariaTotal, int tamañoPagina, JTextArea textArea) {
+    public Memoria(int memoriaPrincipalTotal, int memoriaSecundariaTotal, int tamañoPagina, boolean placementPolicyFirst,
+            boolean fetchPolicy, boolean cleaningPolicy, boolean residentSetFixed, boolean replacementScopeGlobal, JTextArea textArea) {
         this.textArea = textArea;
         this.memoriaPrincipalTotal = memoriaPrincipalTotal;
         this.memoriaSecundariaTotal = memoriaSecundariaTotal;
@@ -44,6 +50,11 @@ public class Memoria {
         this.memoriaPrincipal = memoriaPrincipalTotal;
         this.memoriaSecundaria = memoriaSecundariaTotal;
         this.maximasPaginas = maximaCapacidadPaginas();
+        this.placementPolicyFirst = placementPolicyFirst;
+        this.fetchPolicy = fetchPolicy;
+        this.cleaningPolicy = cleaningPolicy;
+        this.residentSetFixed = residentSetFixed;
+        this.replacementScopeGlobal = replacementScopeGlobal;
         llenarMarcosDisponibles(cantidadMarcos);
         llenarMarcosDisponiblesAlmacenamiento(cantidadMarcosAlmacenamiento);
         llenarMemoriaVacia();
@@ -89,7 +100,9 @@ public class Memoria {
         contadorDisponibles++;
         marcosDisponibles[contadorDisponibles-1] = posicion;
         memoriaPrincipal += tamañoPagina;
-        Arrays.sort(marcosDisponibles);
+        if(placementPolicyFirst){
+            Arrays.sort(marcosDisponibles);
+        }
     }
     
     private void agregarProcesoAlmacenamiento(Proceso proceso, int i) {
@@ -105,7 +118,9 @@ public class Memoria {
         contadorDisponiblesAlmacenamiento++;
         marcosDisponiblesAlmacenamiento[contadorDisponiblesAlmacenamiento-1] = posicion;
         memoriaSecundaria += tamañoPagina;
-        Arrays.sort(marcosDisponiblesAlmacenamiento);
+        if(placementPolicyFirst){
+            Arrays.sort(marcosDisponiblesAlmacenamiento);
+        }
     }
     
     public void agregarPaginaMemoria(Proceso proceso, int pagina) {
