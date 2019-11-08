@@ -10,6 +10,7 @@ public class Simulacion
 {
     
     public static LinkedList <String> procesosTXT;
+    public static LinkedList <Pagina> memoriaVirtual = new LinkedList<>();
     
     public Simulacion()
     {
@@ -67,7 +68,81 @@ public class Simulacion
             System.out.println(resultado.get(i).getId());
             System.out.println();
         }
+           
+    }
+    
+    public static void impresionListass()
+    {
+        for(int i=0; i< memoriaVirtual.size(); i++)
+        {
+            System.out.println(memoriaVirtual.get(i).getProceso().getId());
+            System.out.println();
+        }
+           
+    }
+    
+    public static LinkedList <Proceso> ordenaProcesos()
+    {
         
+        LinkedList <Proceso> CurrentList = new LinkedList<>();
+        LinkedList <Proceso> listaProcesos = TXTProcesos();
+        boolean flag = false;
+        int num = 0;
+        for(int i=0; i < listaProcesos.size(); i++)
+        {
+            flag = false;
+
+            if(CurrentList.isEmpty())
+            {
+               CurrentList.add(listaProcesos.get(i));
+            }else
+            {
+
+                for(int j=0; j < CurrentList.size(); j++)
+                {
+                    if(listaProcesos.get(i).getPrioridad() < CurrentList.get(j).getPrioridad() && flag==false)
+                    {
+                        CurrentList.add(j, listaProcesos.get(i));
+                        flag = true;
+                    }
+                }
+                
+                if(flag==false)
+                {
+                    CurrentList.add(listaProcesos.get(i));
+                }
+                
+            }
+        }
+        
+        return CurrentList;
+
+    }
+    
+    public static void creaPagina(int pagSize, int multiprogramacion)
+    {
+        
+        LinkedList <Proceso> procesosOrdenados = ordenaProcesos();
+        int cantidadPags = 0;
+    
+        for(int i=0; i < procesosOrdenados.size(); i++)
+        {
+            if(multiprogramacion!=0)
+            {
+                cantidadPags = procesosOrdenados.get(i).getRequerimiento() / pagSize;
+                
+                while(cantidadPags!=0)
+                {
+                    Pagina pag = new Pagina(procesosOrdenados.get(i), false, 0);
+                    memoriaVirtual.add(pag);
+                    cantidadPags--;
+                }
+                
+                multiprogramacion--;
+            
+            }else{break;}
+        }    
+
         
     }
     
@@ -75,9 +150,12 @@ public class Simulacion
     public static void main (String [ ] args) 
     {
         Simulacion sim = new Simulacion();
-        impresionListas(TXTProcesos());
+        creaPagina(50, 3);
+        impresionListass();
         
     }
+    
+    
     
     
     
