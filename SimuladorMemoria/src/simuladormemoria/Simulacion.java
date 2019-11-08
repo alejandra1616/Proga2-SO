@@ -5,6 +5,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 
@@ -198,6 +199,8 @@ public class Simulacion
            ArrayList<Pagina> list=memoriaVirtual.get(i);
            for(int j=0; j<cantFrames;j++){
                //System.out.println(list.get(j));
+               Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+               list.get(j).setHoraEntrada(currentTime);
                memoriaFisica.add((Pagina) list.get(j));
            }  
         }
@@ -205,16 +208,42 @@ public class Simulacion
         
     }
     
-    public static Pagina FIFO()
-    {
-        ArrayList <Pagina> listaTemporal = memoriaFisica;
-        Pagina paginaTemporal = listaTemporal.get(0);
+    //------------------------ Replacement policy -------------------------------
+
+    public static Pagina LFU(ArrayList<Pagina> lista){
+        Pagina menorPagina = lista.get(0);
+        for(int i=0;i<lista.size();i++){
+            if(menorPagina.getCantAcceso() > lista.get(i).getCantAcceso()){
+                menorPagina = lista.get(i);
+            }
+        }
         
-        for(int i=0; i < listaTemporal.size(); i++)
-        {
-            if(paginaTemporal.getHoraEntrada().after(listaTemporal.get(i).getHoraEntrada()))
-            {
-                paginaTemporal = listaTemporal.get(i);
+        //System.out.println(menorPagina.getCantAcceso());
+        return menorPagina;
+    }  
+    
+    public static Pagina FIFO(ArrayList<Pagina> lista){
+        Pagina paginaTemporal = lista.get(0);
+        //System.out.println(lista.get(0).getId());
+        for(int i=0; i < lista.size(); i++){
+            //System.out.println(lista.get(i).getHoraEntrada());
+            if(paginaTemporal.getHoraEntrada().after(lista.get(i).getHoraEntrada())){
+                paginaTemporal = lista.get(i);
+            }
+        }
+        //System.out.println("--------------------------------------");
+        //System.out.println(paginaTemporal.getHoraEntrada());
+        //System.out.println(paginaTemporal.getId());
+        
+        return paginaTemporal;
+       
+    }
+    
+    public static Pagina LRU(ArrayList<Pagina> lista){
+        Pagina paginaTemporal = lista.get(0);
+        for(int i=0; i < lista.size(); i++){
+            if(paginaTemporal.getHoraUso().after(lista.get(i).getHoraUso())){
+                paginaTemporal = lista.get(i);
             }
         }
         
@@ -222,16 +251,11 @@ public class Simulacion
         
     }
     
-    public static Pagina LRU()
-    {
-        ArrayList <Pagina> listaTemporal = memoriaFisica;
-        Pagina paginaTemporal = listaTemporal.get(0);
-        
-        for(int i=0; i < listaTemporal.size(); i++)
-        {
-            if(paginaTemporal.getHoraUso().after(listaTemporal.get(i).getHoraUso()))
-            {
-                paginaTemporal = listaTemporal.get(i);
+    public static Pagina MRU(ArrayList<Pagina> lista){
+        Pagina paginaTemporal = lista.get(0);
+        for(int i=0; i < lista.size(); i++){
+            if(paginaTemporal.getHoraUso().before(lista.get(i).getHoraUso())){
+                paginaTemporal = lista.get(i);
             }
         }
         
@@ -239,21 +263,22 @@ public class Simulacion
         
     }
     
-    public static Pagina MRU()
-    {
-        ArrayList <Pagina> listaTemporal = memoriaFisica;
-        Pagina paginaTemporal = listaTemporal.get(0);
-        
-        for(int i=0; i < listaTemporal.size(); i++)
-        {
-            if(paginaTemporal.getHoraUso().before(listaTemporal.get(i).getHoraUso()))
-            {
-                paginaTemporal = listaTemporal.get(i);
+        public static Pagina SecondChance (ArrayList<Pagina> lista){
+        Pagina paginaTemporal = lista.get(0);
+        //System.out.println(lista.get(0).getId());
+        for(int i=0; i < lista.size(); i++){
+            //System.out.println(lista.get(i).getHoraEntrada());
+            if(paginaTemporal.getHoraEntrada().after(lista.get(i).getHoraEntrada()) && paginaTemporal.isSucia()== false){
+                paginaTemporal = lista.get(i);
             }
         }
+
+        //System.out.println("--------------------------------------");
+        //System.out.println(paginaTemporal.getHoraEntrada());
+        //System.out.println(paginaTemporal.getId());
         
         return paginaTemporal;
-        
+       
     }
     
     public static void cargaRequisiciones()

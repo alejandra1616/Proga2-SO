@@ -5,7 +5,14 @@
  */
 package GUI;
 
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Random;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import simuladormemoria.Pagina;
+import simuladormemoria.Proceso;
 
 /**
  *
@@ -16,10 +23,17 @@ public class JFrameMamoria extends javax.swing.JFrame {
     /**
      * Creates new form JFrameMamoria
      */
+    Renderer r = new Renderer();
+    
+    
     public JFrameMamoria() {
         initComponents();
+        
+       
         llenarMemoriaVirtual();
         llenarMemoriaFisica();
+        jTableMemoriaFisica.setDefaultRenderer(Object.class, r);
+        jTableMemoriaVirtual.setDefaultRenderer(Object.class, r);
     }
 
     /**
@@ -237,14 +251,45 @@ public class JFrameMamoria extends javax.swing.JFrame {
 
     //Modifica cabezara o columnas de la tabla
     modelo.setColumnIdentifiers(new Object [] {
-
-       "1", "2", "3", "4", "5"
-
+       "id Proceso", "id Pagina", "Sucia", "Cantidad de accesos"
     });
 
-    //Agrega una fila a la tabla      
-    Object [] object = new Object[]{"1","Jose","Hernandez","310928382","Hola"};
-    modelo.addRow(object); 
+         
+    /*Object [] object = new Object[]{"1","Jose","Hernandez","310928382","Hola"};
+    modelo.addRow(object); */
+    
+    //-------------- Para crear lista de páginas de prueba
+    Proceso proc1 = new Proceso("1", 1, 1);
+    Proceso proc2 = new Proceso("2", 1, 1);
+    Proceso proc4 = new Proceso("4", 1, 1);
+    Proceso proc5 = new Proceso("5", 1, 1);
+    Proceso proc6 = new Proceso("6", 1, 1);
+    Proceso proc7 = new Proceso("7", 1, 1);
+    
+    Pagina pag1 = new Pagina(1, proc1, true, 2);
+    Pagina pag2 = new Pagina(2, proc1, true, 2);
+    Pagina pag3 = new Pagina(3, proc2, true, 2);
+    Pagina pag4 = new Pagina(4, proc2, true, 2);
+    Pagina pag5 = new Pagina(5, proc5, true, 2);
+    Pagina pag6 = new Pagina(6, proc4, true, 2);
+    Pagina pag7 = new Pagina(7, proc2, true, 2);
+    Pagina pag8 = new Pagina(8, proc7, true, 2);
+    Pagina pag9 = new Pagina(9, proc1, true, 2);
+    Pagina pag10 = new Pagina(10, proc5, true, 2);
+    Pagina pag11 = new Pagina(11, proc6, true, 2);
+    
+    ArrayList<Pagina> lista = new ArrayList<Pagina>();
+    lista.add(pag1);lista.add(pag9);lista.add(pag4);lista.add(pag10);lista.add(pag7);lista.add(pag11);
+    lista.add(pag5);lista.add(pag8);lista.add(pag2);lista.add(pag3);lista.add(pag6);
+    
+    //Esta funcion lo que recibe es un arraylist de las páginas en memoria virtual    
+        
+        //Agrega las filas a la tabla 
+        for (int i = 0; i < lista.size(); i++) {
+            Pagina pag = lista.get(i);
+            Object [] object = new Object[]{pag.getProceso().getId(), pag.getId(),pag.isSucia(),pag.getCantAcceso()};
+            modelo.addRow(object);
+        }
      
    }
    
@@ -254,16 +299,47 @@ public class JFrameMamoria extends javax.swing.JFrame {
 
     //Modifica cabezara o columnas de la tabla
     modelo.setColumnIdentifiers(new Object [] {
-
-       "1", "2", "3", "4", "5"
-
+       "id Proceso", "id Pagina", "Sucia", "Cantidad de accesos"
     });
-
-    //Agrega una fila a la tabla      
-    Object [] object = new Object[]{"1","Jose","Hernandez","310928382","Hola"};
-    modelo.addRow(object); 
+    
+    
+    //-------------- Para crear lista de páginas de prueba
+    Proceso proc1 = new Proceso("1", 1, 1);
+    Proceso proc2 = new Proceso("2", 1, 1);
+    Proceso proc4 = new Proceso("4", 1, 1);
+    Proceso proc5 = new Proceso("5", 1, 1);
+    Proceso proc6 = new Proceso("6", 1, 1);
+    Proceso proc7 = new Proceso("7", 1, 1);
+    
+    Pagina pag1 = new Pagina(1, proc1, true, 2);
+    Pagina pag2 = new Pagina(2, proc1, true, 2);
+    Pagina pag3 = new Pagina(3, proc2, true, 2);
+    Pagina pag4 = new Pagina(4, proc2, true, 2);
+    Pagina pag5 = new Pagina(5, proc5, true, 2);
+    Pagina pag6 = new Pagina(6, proc4, true, 2);
+    Pagina pag7 = new Pagina(7, proc2, true, 2);
+    Pagina pag8 = new Pagina(8, proc7, true, 2);
+    Pagina pag9 = new Pagina(9, proc1, true, 2);
+    Pagina pag10 = new Pagina(10, proc5, true, 2);
+    Pagina pag11 = new Pagina(11, proc6, true, 2);
+    
+    ArrayList<Pagina> lista = new ArrayList<Pagina>();
+    lista.add(pag1);lista.add(pag2);lista.add(pag3);lista.add(pag4);lista.add(pag5);lista.add(pag6);
+    lista.add(pag7);lista.add(pag8);lista.add(pag9);lista.add(pag10);lista.add(pag11);
+    
+    
+    //Esta funcion lo que recibe es un arraylist de las páginas en memoria fisica
+        
+        //Agrega las filas a la tabla 
+        for (int i = 0; i < lista.size(); i++) {
+            Pagina pag = lista.get(i);
+            Object [] object = new Object[]{pag.getProceso().getId(), pag.getId(),pag.isSucia(),pag.getCantAcceso()};
+            modelo.addRow(object);
+        }
+     
      
    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
