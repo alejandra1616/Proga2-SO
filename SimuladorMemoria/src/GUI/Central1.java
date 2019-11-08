@@ -123,6 +123,7 @@ public class Central1 extends javax.swing.JFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Placement policy", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         buttonGroup1.add(rbtnPlacementPolicyfirstA);
+        rbtnPlacementPolicyfirstA.setSelected(true);
         rbtnPlacementPolicyfirstA.setText("First available");
 
         buttonGroup1.add(rbtnPlacementPoliciyNextA);
@@ -154,6 +155,7 @@ public class Central1 extends javax.swing.JFrame {
         rbtnLRU.setText("LRU");
 
         buttonGroup2.add(rbtnFIFO);
+        rbtnFIFO.setSelected(true);
         rbtnFIFO.setText("FIFO");
         rbtnFIFO.setToolTipText("");
         rbtnFIFO.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +216,10 @@ public class Central1 extends javax.swing.JFrame {
         });
 
         buttonGroup4.add(rbtnVariable);
+        rbtnVariable.setSelected(true);
         rbtnVariable.setText("Variable");
+
+        jTextFieldResidentSet.setText("0");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -254,6 +259,7 @@ public class Central1 extends javax.swing.JFrame {
         });
 
         buttonGroup5.add(rbtnReplacementScopeLocal);
+        rbtnReplacementScopeLocal.setSelected(true);
         rbtnReplacementScopeLocal.setText("Local");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -282,6 +288,7 @@ public class Central1 extends javax.swing.JFrame {
         rbtnClaningDemand.setText("Demand");
 
         buttonGroup6.add(rbtnCleaningPrecleaning);
+        rbtnCleaningPrecleaning.setSelected(true);
         rbtnCleaningPrecleaning.setText("Pre-cleaning");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -308,7 +315,7 @@ public class Central1 extends javax.swing.JFrame {
 
         jLabel1.setText("Degree of Multiprogramming:");
 
-        jTextFieldMultiprogramming.setText("##");
+        jTextFieldMultiprogramming.setText("0");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -490,19 +497,58 @@ public class Central1 extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         
-        boolean fetchpolicy;
+        //true (Demand) y false (Prepaging)
+        boolean fetchPolicy=false; 
+        //true (First available) y false(Next available) 
+        boolean placementPolicy=false;
+        // string con el nombre del algoritmo
+        String replacementPolicy="FIFO";
+        //Tama;o del resident set
+        int sizeResidentSet=0;
+        // true (Fixed) y false (Variable)
+        boolean residenSet=false;
+        //true (global) y false (local)
+        boolean scope=false;
+        // true (Demand) y false (Precleaning)
+        boolean cleaningPolicy=false;
+        // cant de procesos a cargar
+        int multiprogramming=0;
 
-        
         if(rbtnFetchPolicyPrepaging.isSelected()){
-            System.out.println("hola");
-            
+            fetchPolicy= true;
         }
-        else{
-            if(rbtnFetchPolicyDemand.isSelected()){
-                System.out.println("no");
-            }
-                    
+        if(rbtnPlacementPolicyfirstA.isSelected()){
+            placementPolicy=true;
         }
+        if(rbtnFixed.isSelected()){
+            residenSet=true;
+        }
+        if(rbtnReplacementScopeGlobal.isSelected()){
+            scope=true;
+        }
+        if(rbtnClaningDemand.isSelected()){
+            cleaningPolicy=true;
+        }
+        
+        if(rbtnLFU.isSelected()){
+            replacementPolicy="LFU";
+        }
+        if(rbtnMRU.isSelected()){
+            replacementPolicy="MRU";
+        }
+        if(rbtnLRU.isSelected()){
+            replacementPolicy="LRU";
+        }
+        if(rbtnSecondChance.isSelected()){
+            replacementPolicy="SecondChance";
+        }
+        
+        sizeResidentSet = Integer.parseInt(jTextFieldResidentSet.getText());
+        multiprogramming = Integer.parseInt(jTextFieldMultiprogramming.getText());
+        //(fetchPolicy , placementPolicy , replacementPolicy , sizeResidentSet , residenSet , scope , cleaningPolicy  , multiprogramming)
+                
+        JFrameMamoria jFrameMemoria = new JFrameMamoria();
+        jFrameMemoria.show();
           
         
         
