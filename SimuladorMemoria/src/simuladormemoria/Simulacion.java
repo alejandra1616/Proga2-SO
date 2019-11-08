@@ -12,13 +12,16 @@ public class Simulacion
 {
     
     public static ArrayList <String> procesosTXT;
+    public static int tamañoPagina;
+    public static ArrayList<Requi> lista_requis;
     public static ArrayList <ArrayList <Pagina>> memoriaVirtual = new ArrayList<ArrayList <Pagina>>();
     public static ArrayList <Pagina> memoriaFisica = new ArrayList<>(80);
     
     public Simulacion()
     {
         procesosTXT = new ArrayList<>();
-        File f = new File( "C:\\Users\\emers\\Desktop\\Procesos.txt" );
+        //File f = new File( "C:\\Users\\emers\\Desktop\\Procesos.txt" );
+        File f = new File("C:\\Users\\Leo\\Desktop\\Procesos.txt");
         BufferedReader entrada = null;
         try {
             entrada = new BufferedReader( new FileReader( f ) );
