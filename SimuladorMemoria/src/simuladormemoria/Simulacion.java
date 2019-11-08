@@ -12,8 +12,9 @@ public class Simulacion
 {
     
     public static ArrayList <String> procesosTXT;
+    public static ArrayList <String> requisicionesTXT;
     public static int tamañoPagina;
-    public static ArrayList<Requi> lista_requis;
+    public static ArrayList<Requi> lista_requis = new ArrayList<Requi>();;
     public static ArrayList <ArrayList <Pagina>> memoriaVirtual = new ArrayList<ArrayList <Pagina>>();
     public static ArrayList <Pagina> memoriaFisica = new ArrayList<>(80);
     
@@ -102,6 +103,18 @@ public class Simulacion
         {
             System.out.println(memoriaFisica.get(i).getId());
             System.out.println(memoriaFisica.get(i).getProceso().getId());
+        }
+           
+    }
+    
+    public static void impresionListaRequi()
+    {
+        System.out.println("NUM de requis: " + lista_requis.size());
+        
+        for(int i=0; i< lista_requis.size(); i++)
+        {
+            System.out.println(lista_requis.get(i).getProceso());
+            
         }
            
     }
@@ -243,15 +256,70 @@ public class Simulacion
         
     }
     
+    public static void cargaRequisiciones()
+    {
+        requisicionesTXT = new ArrayList<>();
+        //File f = new File( "C:\\Users\\Leo\\Desktop\\Procesos.txt" );
+        File f = new File("C:\\Users\\emers\\Desktop\\Requisiciones.txt");
+        BufferedReader entrada = null;
+        try {
+            entrada = new BufferedReader( new FileReader( f ) );
+            String linea;
+            while(entrada.ready())
+            {
+                linea = entrada.readLine();
+                requisicionesTXT.add(linea);
+            }
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally
+        {
+        try{
+            entrada.close();
+        }catch(IOException e1){}
+        }
+        
+        
+        System.out.println("jo: " + requisicionesTXT);
+        
+    }
+    
+    public static void TXTRequisiciones()
+    {
+        
+        cargaRequisiciones();
+        
+        String nombre;
+        int direccion = 0;
+        String [] lista;
+       
+        
+        for(int i = 0; i < requisicionesTXT.size(); i++)
+        {
+            lista = requisicionesTXT.get(i).split(" ", 2);
+            nombre = lista[0];
+            direccion = Integer.parseInt(lista[1]);
+                    
+            Requi re = new Requi(nombre, direccion);
+            lista_requis.add(re);
+            
+        }
+        
+    }   
+    
     
     public static void main (String [ ] args) 
     {
         Simulacion sim = new Simulacion();
         creaPagina(25, 3);
-        impresionListasVirtual();
+        //impresionListasVirtual();
         //Son tres frames para prepaging porque empieza en 0.
         Prepaging(3);
-        impresionListaFisica();
+        //impresionListaFisica();
+        TXTRequisiciones();
+        //impresionListaRequi();
+        
         
     }
     

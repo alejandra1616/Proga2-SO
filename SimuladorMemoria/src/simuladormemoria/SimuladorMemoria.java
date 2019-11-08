@@ -21,15 +21,7 @@ public class SimuladorMemoria {
         // TODO code application logic here
         Central1 c = new Central1();
         //c.show();
-        System.out.println("Ale se la come");
-        Requi r1 = new Requi("Proceso1", 5);
-        Requi r2 = new Requi("Proceso2", 450);
-        Requi r3 = new Requi("Proceso3", 200);
-        Requi r4 = new Requi("Proceso1", 100);
-        lista_requis.add(r1);
-        lista_requis.add(r2);
-        lista_requis.add(r3);
-        lista_requis.add(r4);
+
         
         
     }

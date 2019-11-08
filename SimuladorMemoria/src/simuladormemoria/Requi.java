@@ -16,7 +16,7 @@ public class Requi {
     
     private String proceso;
     private int direccion;
-    private int numeroPagina = abs(direccion/tamañoPagina);
+    private int numeroPagina = abs(direccion/25);
 
     public Requi(String proceso, int direccion) {
         this.proceso = proceso;
