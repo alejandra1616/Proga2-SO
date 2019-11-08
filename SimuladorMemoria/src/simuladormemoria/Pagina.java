@@ -82,4 +82,8 @@ public class Pagina {
         this.cantAcceso = cantAcceso;
     }
     
+    public void aumentarAcceso(){
+        this.cantAcceso +=1;
+    }
+    
 }

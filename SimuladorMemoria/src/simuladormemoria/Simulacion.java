@@ -193,6 +193,8 @@ public class Simulacion
                //System.out.println(list.get(j));
                Timestamp currentTime = new Timestamp(System.currentTimeMillis());
                list.get(j).setHoraEntrada(currentTime);
+               list.get(j).setHoraUso(currentTime);
+               list.get(j).aumentarAcceso();
                memoriaFisica.add((Pagina) list.get(j));
            }  
         }
@@ -225,23 +227,20 @@ public class Simulacion
             if(paginaTemporal.getHoraEntrada().after(lista.get(i).getHoraEntrada())){
                 paginaTemporal = lista.get(i);
             }
-        }
-        //System.out.println("--------------------------------------");
-        //System.out.println(paginaTemporal.getHoraEntrada());
-        //System.out.println(paginaTemporal.getId());
-        
+        }       
         return paginaTemporal;
        
     }
     
     public static Pagina LRU(ArrayList<Pagina> lista){
+        System.out.println("LISTA DE LRU TIENE: "  +  lista.size());
         Pagina paginaTemporal = lista.get(0);
         for(int i=0; i < lista.size(); i++){
             if(paginaTemporal.getHoraUso().after(lista.get(i).getHoraUso())){
                 paginaTemporal = lista.get(i);
             }
         }
-        
+       
         return paginaTemporal;
         
     }
@@ -353,6 +352,7 @@ public class Simulacion
                 Timestamp currentTime = new Timestamp(System.currentTimeMillis());
                 pagEntra.setHoraEntrada(currentTime);
                 pagEntra.setHoraUso(currentTime);
+                pagEntra.aumentarAcceso();
                 memoriaFisica.add(i, pagEntra);
                 break;
             }
@@ -364,9 +364,7 @@ public class Simulacion
         System.out.println("Entra traer memoria");
         int num=request.getNumeroPagina();
         Pagina respuesta = new Pagina();
-        System.out.println("num "+ num);
         for(int i=0; i< memoriaVirtual.size(); i++){
-            System.out.println("Tamaño " + memoriaVirtual.get(i).size() + memoriaVirtual.get(i).get(0).getProceso().getId());
            if(request.getProceso().equals(memoriaVirtual.get(i).get(0).getProceso().getId())){
                respuesta= memoriaVirtual.get(i).get(num);
                break;

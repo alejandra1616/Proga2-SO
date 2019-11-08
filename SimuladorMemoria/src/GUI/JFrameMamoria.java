@@ -14,6 +14,7 @@ import static GUI.Central1.sizeResidentSet;
 import static GUI.Central1.tamañoMemoriaFisica;
 import static GUI.Central1.tamañoPagina;
 import static java.lang.Math.abs;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import simuladormemoria.Pagina;
@@ -348,17 +349,26 @@ public class JFrameMamoria extends javax.swing.JFrame {
        Requi req = Simulacion.lista_requis.get(0);
        impresionListasVirtual();
          //Revisa si está cargada
-        System.out.println("Req " + req.getNumeroPagina());
        if(memoriaFisica.indexOf(traerDeMemoriaVirtual(req)) != -1){
            System.out.println("Mierda dentro: " + traerDeMemoriaVirtual(req).getId());
            int pos = memoriaFisica.indexOf(traerDeMemoriaVirtual(req));
            memoriaFisica.get(pos).setSucia(true);
+           Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+           memoriaFisica.get(pos).setHoraUso(currentTime);
+           memoriaFisica.get(pos).aumentarAcceso();
            System.out.println("ESTÁ ENSUCIANDO");
+           
         //Revisa si la memoria no está llena y es variable
         }else if(memoriaFisica.size()!=(abs(tamañoMemoriaFisica/tamañoPagina)) && residenSet == false){
            Pagina pagina = traerDeMemoriaVirtual(req);
+           Timestamp currentTime = new Timestamp(System.currentTimeMillis());
+           pagina.setHoraEntrada(currentTime);
+           pagina.setHoraUso(currentTime);
+           pagina.setSucia(true);
+           pagina.aumentarAcceso();
            memoriaFisica.add(pagina);
            System.out.println("NO LLENA Y VARIABLE");
+           
         //Revisa si esta llena y es variable
        }else if(memoriaFisica.size()==(abs(tamañoMemoriaFisica/tamañoPagina)) && residenSet == false){
            System.out.println("Fisica llena y es variable");
@@ -366,6 +376,7 @@ public class JFrameMamoria extends javax.swing.JFrame {
            reemplazo(req);
            System.out.println("LLENA Y VARIABLE");
 
+           //No está cargado y es fixed
         }else if(residenSet){
            System.out.println("Es fixed");
            Pagina pagina = traerDeMemoriaVirtual(req);
