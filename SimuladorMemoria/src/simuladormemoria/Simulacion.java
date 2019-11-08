@@ -91,7 +91,7 @@ public class Simulacion
            
     }
     
-        public static void impresionListaFisica()
+    public static void impresionListaFisica()
     {
         System.out.println("NUM PROCESOS en fisica: " + memoriaFisica.size());
         
@@ -186,6 +186,57 @@ public class Simulacion
            }  
         }
         System.out.println(memoriaFisica);
+        
+    }
+    
+    public static Pagina FIFO()
+    {
+        ArrayList <Pagina> listaTemporal = memoriaFisica;
+        Pagina paginaTemporal = listaTemporal.get(0);
+        
+        for(int i=0; i < listaTemporal.size(); i++)
+        {
+            if(paginaTemporal.getHoraEntrada().after(listaTemporal.get(i).getHoraEntrada()))
+            {
+                paginaTemporal = listaTemporal.get(i);
+            }
+        }
+        
+        return paginaTemporal;
+        
+    }
+    
+    public static Pagina LRU()
+    {
+        ArrayList <Pagina> listaTemporal = memoriaFisica;
+        Pagina paginaTemporal = listaTemporal.get(0);
+        
+        for(int i=0; i < listaTemporal.size(); i++)
+        {
+            if(paginaTemporal.getHoraUso().after(listaTemporal.get(i).getHoraUso()))
+            {
+                paginaTemporal = listaTemporal.get(i);
+            }
+        }
+        
+        return paginaTemporal;
+        
+    }
+    
+    public static Pagina MRU()
+    {
+        ArrayList <Pagina> listaTemporal = memoriaFisica;
+        Pagina paginaTemporal = listaTemporal.get(0);
+        
+        for(int i=0; i < listaTemporal.size(); i++)
+        {
+            if(paginaTemporal.getHoraUso().before(listaTemporal.get(i).getHoraUso()))
+            {
+                paginaTemporal = listaTemporal.get(i);
+            }
+        }
+        
+        return paginaTemporal;
         
     }
     
