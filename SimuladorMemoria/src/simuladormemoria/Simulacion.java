@@ -308,6 +308,35 @@ public class Simulacion
         
     }   
     
+    public static ArrayList <Pagina> local(Requi Requisito)
+    {
+        ArrayList <Pagina> subLista = new ArrayList<>();
+        
+        for (int i=0; i < memoriaFisica.size(); i++)
+        {
+            if(memoriaFisica.get(i).getProceso().getId().equals(Requisito.getProceso()))
+            {
+                subLista.add(memoriaFisica.get(i));
+            }
+            
+        }
+        
+        return subLista;
+        
+    }
+    
+    public static void cambioPagina(Pagina pagEntra, Pagina pagSale)
+    {
+        for(int i=0; i < memoriaFisica.size(); i++)
+        {
+            if(pagSale.getId()==memoriaFisica.get(i).getId())
+            {
+                memoriaFisica.remove(i);
+                memoriaFisica.add(i, pagEntra);
+            }
+        }
+    }
+    
     
     public static void main (String [ ] args) 
     {
