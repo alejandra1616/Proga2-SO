@@ -1,5 +1,7 @@
 package simuladormemoria;
 
+import java.awt.Color;
+
 /**
  *
  * @author emers
@@ -40,7 +42,6 @@ public class Proceso
     public void setPrioridad(int prioridad) {
         this.prioridad = prioridad;
     }
-    
-    
+  
     
 }
