@@ -1,20 +1,23 @@
 package simuladormemoria;
 
+import java.awt.List;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
+
 
 public class Simulacion 
 {
     
-    public static LinkedList <String> procesosTXT;
-    public static LinkedList <Pagina> memoriaVirtual = new LinkedList<>();
+    public static ArrayList <String> procesosTXT;
+    public static ArrayList <ArrayList <Pagina>> memoriaVirtual = new ArrayList<ArrayList <Pagina>>();
+    public static ArrayList <Pagina> memoriaFisica = new ArrayList<>(80);
     
     public Simulacion()
     {
-        procesosTXT = new LinkedList<>();
+        procesosTXT = new ArrayList<>();
         File f = new File( "C:\\Users\\emers\\Desktop\\Procesos.txt" );
         BufferedReader entrada = null;
         try {
@@ -37,13 +40,13 @@ public class Simulacion
         
     }
     
-    public static LinkedList<Proceso> TXTProcesos()
+    public static ArrayList<Proceso> TXTProcesos()
     {
         String nombre;
         int requerimiento = 0;
         int prioridad = 0;
         String [] lista;
-        LinkedList <Proceso> TXT = new LinkedList<>();
+        ArrayList <Proceso> TXT = new ArrayList<>();
         
         for(int i = 0; i < procesosTXT.size(); i++)
         {
@@ -61,7 +64,7 @@ public class Simulacion
         
     }    
     
-    public static void impresionListas(LinkedList<Proceso> resultado)
+    public static void impresionListas(ArrayList<Proceso> resultado)
     {
         for(int i=0; i< resultado.size(); i++)
         {
@@ -71,21 +74,39 @@ public class Simulacion
            
     }
     
-    public static void impresionListass()
+    public static void impresionListasVirtual()
     {
+        System.out.println("NUM PROCESOS en virtual: " + memoriaVirtual.size());
+        
         for(int i=0; i< memoriaVirtual.size(); i++)
         {
-            System.out.println(memoriaVirtual.get(i).getProceso().getId());
-            System.out.println();
+            for(int j=0; j < memoriaVirtual.get(i).size(); j++)
+            {
+                
+                System.out.println(memoriaVirtual.get(i).get(j).getProceso().getId());
+                System.out.println();
+
+            }
         }
            
     }
     
-    public static LinkedList <Proceso> ordenaProcesos()
+        public static void impresionListaFisica()
+    {
+        System.out.println("NUM PROCESOS en fisica: " + memoriaFisica.size());
+        
+        for(int i=0; i< memoriaFisica.size(); i++)
+        {
+            System.out.println(memoriaFisica.get(i).getProceso().getId());
+        }
+           
+    }
+    
+    public static ArrayList <Proceso> ordenaProcesos()
     {
         
-        LinkedList <Proceso> CurrentList = new LinkedList<>();
-        LinkedList <Proceso> listaProcesos = TXTProcesos();
+        ArrayList <Proceso> CurrentList = new ArrayList<>();
+        ArrayList <Proceso> listaProcesos = TXTProcesos();
         boolean flag = false;
         int num = 0;
         for(int i=0; i < listaProcesos.size(); i++)
@@ -122,11 +143,13 @@ public class Simulacion
     public static void creaPagina(int pagSize, int multiprogramacion)
     {
         
-        LinkedList <Proceso> procesosOrdenados = ordenaProcesos();
+        ArrayList <Proceso> procesosOrdenados = ordenaProcesos();
         int cantidadPags = 0;
     
         for(int i=0; i < procesosOrdenados.size(); i++)
         {
+            ArrayList <Pagina> paginasTemporal = new ArrayList<>();
+            
             if(multiprogramacion!=0)
             {
                 cantidadPags = procesosOrdenados.get(i).getRequerimiento() / pagSize;
@@ -134,15 +157,32 @@ public class Simulacion
                 while(cantidadPags!=0)
                 {
                     Pagina pag = new Pagina(procesosOrdenados.get(i), false, 0);
-                    memoriaVirtual.add(pag);
+                    paginasTemporal.add(pag);
                     cantidadPags--;
                 }
                 
                 multiprogramacion--;
             
             }else{break;}
+            
+            
+            memoriaVirtual.add(paginasTemporal);
         }    
 
+        
+    }
+    
+    public static void Prepaging(int cantFrames){
+        
+        for(int i=0; i< memoriaVirtual.size(); i++)
+        {
+           ArrayList<Pagina> list=memoriaVirtual.get(i);
+           for(int j=0; j<cantFrames;j++){
+               //System.out.println(list.get(j));
+               memoriaFisica.add((Pagina) list.get(j));
+           }  
+        }
+        System.out.println(memoriaFisica);
         
     }
     
@@ -150,8 +190,11 @@ public class Simulacion
     public static void main (String [ ] args) 
     {
         Simulacion sim = new Simulacion();
-        creaPagina(50, 3);
-        impresionListass();
+        creaPagina(25, 3);
+        impresionListasVirtual();
+        //Son tres frames para prepaging porque empieza en 0.
+        Prepaging(3);
+        impresionListaFisica();
         
     }
     
