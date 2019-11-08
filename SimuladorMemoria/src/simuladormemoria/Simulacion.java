@@ -19,7 +19,8 @@ public class Simulacion
     public Simulacion()
     {
         procesosTXT = new ArrayList<>();
-        File f = new File( "C:\\Users\\emers\\Desktop\\Procesos.txt" );
+        //File f = new File( "C:\\Users\\emers\\Desktop\\Procesos.txt" );
+        File f = new File("C:\\Users\\Leo\\Desktop\\Procesos.txt");
         BufferedReader entrada = null;
         try {
             entrada = new BufferedReader( new FileReader( f ) );
