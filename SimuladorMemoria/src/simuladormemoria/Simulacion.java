@@ -97,6 +97,7 @@ public class Simulacion
         
         for(int i=0; i< memoriaFisica.size(); i++)
         {
+            System.out.println(memoriaFisica.get(i).getId());
             System.out.println(memoriaFisica.get(i).getProceso().getId());
         }
            
@@ -145,20 +146,22 @@ public class Simulacion
         
         ArrayList <Proceso> procesosOrdenados = ordenaProcesos();
         int cantidadPags = 0;
+        int contador= 0;
     
         for(int i=0; i < procesosOrdenados.size(); i++)
         {
             ArrayList <Pagina> paginasTemporal = new ArrayList<>();
-            
+            contador = 0;
             if(multiprogramacion!=0)
             {
                 cantidadPags = procesosOrdenados.get(i).getRequerimiento() / pagSize;
                 
                 while(cantidadPags!=0)
                 {
-                    Pagina pag = new Pagina(procesosOrdenados.get(i), false, 0);
+                    Pagina pag = new Pagina(contador, procesosOrdenados.get(i), false, 0);
                     paginasTemporal.add(pag);
                     cantidadPags--;
+                    contador++;
                 }
                 
                 multiprogramacion--;

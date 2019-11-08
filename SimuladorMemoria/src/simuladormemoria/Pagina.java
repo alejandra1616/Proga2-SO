@@ -1,25 +1,20 @@
 package simuladormemoria;
 
-/**
- *
- * @author Ale
- */
+import java.sql.Timestamp;
+
+        
 public class Pagina {
+    
     private int id;
     private Proceso proceso;
     private boolean sucia;
     private int cantAcceso;
-    
-    
-    public Pagina(int id,Proceso proceso) {
-        this.id= id;
-        this.proceso=proceso;
-        this.sucia=false;
-        this.cantAcceso=0;
-
-    }
-    
-    public Pagina(Proceso proceso,boolean sucia,int cantAcceso) {
+    private Timestamp horaEntrada;
+    private Timestamp horaUso;
+    private int contadorReferencia;
+     
+    public Pagina(int id, Proceso proceso,boolean sucia,int cantAcceso) 
+    {
         this.id= id;
         this.proceso=proceso;
         this.sucia=sucia;
@@ -27,6 +22,37 @@ public class Pagina {
 
     }
 
+    public int getContadorReferencia() {
+        return contadorReferencia;
+    }
+
+    public void setContadorReferencia(int contadorReferencia) {
+        this.contadorReferencia = contadorReferencia;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Timestamp getHoraEntrada() {
+        return horaEntrada;
+    }
+
+    public void setHoraEntrada(Timestamp horaEntrada) {
+        this.horaEntrada = horaEntrada;
+    }
+
+    public Timestamp getHoraUso() {
+        return horaUso;
+    }
+
+    public void setHoraUso(Timestamp horaUso) {
+        this.horaUso = horaUso;
+    }
 
     public Proceso getProceso() {
         return proceso;
