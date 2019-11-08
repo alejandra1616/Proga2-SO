@@ -12,6 +12,7 @@ public class Simulacion
 {
     
     public static ArrayList <String> procesosTXT;
+    public static int tamañoPagina;
     public static ArrayList<Requi> lista_requis;
     public static ArrayList <ArrayList <Pagina>> memoriaVirtual = new ArrayList<ArrayList <Pagina>>();
     public static ArrayList <Pagina> memoriaFisica = new ArrayList<>(80);

@@ -5,6 +5,9 @@
  */
 package simuladormemoria;
 
+import static java.lang.Math.abs;
+import static simuladormemoria.Simulacion.tamañoPagina;
+
 /**
  *
  * @author Leo
@@ -13,6 +16,7 @@ public class Requi {
     
     private String proceso;
     private int direccion;
+    private int numeroPagina = abs(direccion/tamañoPagina);
 
     public Requi(String proceso, int direccion) {
         this.proceso = proceso;
