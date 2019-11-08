@@ -29,6 +29,7 @@ import static simuladormemoria.Simulacion.SecondChance;
 import static simuladormemoria.Simulacion.TXTRequisiciones;
 import static simuladormemoria.Simulacion.cambioPagina;
 import static simuladormemoria.Simulacion.creaPagina;
+import static simuladormemoria.Simulacion.impresionListaFisica;
 import static simuladormemoria.Simulacion.impresionListasVirtual;
 import static simuladormemoria.Simulacion.lista_requis;
 import static simuladormemoria.Simulacion.local;
@@ -347,7 +348,8 @@ public class JFrameMamoria extends javax.swing.JFrame {
    public void simulacionTotal(){
        System.out.println("--------------------------------------------------------------------------------------Entro SimulacionTotal");
        Requi req = Simulacion.lista_requis.get(0);
-       impresionListasVirtual();
+       System.out.println("Antes ----------------");
+       impresionListaFisica();
          //Revisa si está cargada
        if(memoriaFisica.indexOf(traerDeMemoriaVirtual(req)) != -1){
            System.out.println("Mierda dentro: " + traerDeMemoriaVirtual(req).getId());
@@ -383,6 +385,8 @@ public class JFrameMamoria extends javax.swing.JFrame {
            reemplazo(req);
            
        }
+       System.out.println("Final ----------------");
+       impresionListaFisica();
        Simulacion.lista_requis.remove(0);
    }
    

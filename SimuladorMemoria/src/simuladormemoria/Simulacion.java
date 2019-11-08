@@ -343,16 +343,23 @@ public class Simulacion
     }
     
     public static void cambioPagina(Pagina pagEntra, Pagina pagSale){
+        System.out.println("Proceso Entra " +pagSale.getProceso().getId());
+        System.out.println("Proceso Sale " + pagEntra.getProceso().getId());
         for(int i=0; i < memoriaFisica.size(); i++)
         {
-            if(pagSale.getId()==memoriaFisica.get(i).getId())
+            //System.out.println("qqqqqq " + pagSale.getProceso().getId());
+            //System.out.println("pppppp " + memoriaFisica.get(i).getProceso().getId());
+            if(pagSale.getId()==memoriaFisica.get(i).getId()
+                    && pagSale.getProceso().getId().equals(memoriaFisica.get(i).getProceso().getId()))
             {
+                System.out.println("MMMMM " + memoriaFisica.get(i).getProceso().getId());
                 memoriaFisica.remove(i);
                 pagEntra.setSucia(true);
                 Timestamp currentTime = new Timestamp(System.currentTimeMillis());
                 pagEntra.setHoraEntrada(currentTime);
                 pagEntra.setHoraUso(currentTime);
                 pagEntra.aumentarAcceso();
+                
                 memoriaFisica.add(i, pagEntra);
                 break;
             }
