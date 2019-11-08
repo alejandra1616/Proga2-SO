@@ -14,6 +14,30 @@ public class Central1 extends javax.swing.JFrame {
     /**
      * Creates new form Central
      */
+    public static boolean fetchPolicy=false; 
+        //true (First available) y false(Next available) 
+    public static boolean placementPolicy=false;
+        // string con el nombre del algoritmo
+    public static String replacementPolicy="FIFO";
+        //Tama;o del resident set
+    public static int sizeResidentSet=0;
+        // true (Fixed) y false (Variable)
+    public static boolean residenSet=false;
+        //true (global) y false (local)
+    public static boolean scope=false;
+        // true (Demand) y false (Precleaning)
+    public static boolean cleaningPolicy=false;
+        // cant de procesos a cargar
+    public static int multiprogramming=0;
+    
+    public static int tamañoPagina = 0;
+    
+    public static int tamañoMemoriaFisica = 0;
+    
+    public static int tamañoMemoriaVirtual = 0;
+    
+    public static int numeroRequis = 0;
+    
     public Central1() {
         initComponents();
     }
@@ -98,6 +122,7 @@ public class Central1 extends javax.swing.JFrame {
         });
 
         buttonGroup3.add(rbtnFetchPolicyPrepaging);
+        rbtnFetchPolicyPrepaging.setSelected(true);
         rbtnFetchPolicyPrepaging.setText("Prepaging");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -105,19 +130,20 @@ public class Central1 extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addComponent(rbtnFetchPolicyDemand)
-                .addGap(70, 70, 70)
+                .addGap(45, 45, 45)
                 .addComponent(rbtnFetchPolicyPrepaging)
+                .addGap(37, 37, 37)
+                .addComponent(rbtnFetchPolicyDemand)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rbtnFetchPolicyDemand)
-                    .addComponent(rbtnFetchPolicyPrepaging))
-                .addGap(0, 12, Short.MAX_VALUE))
+                    .addComponent(rbtnFetchPolicyPrepaging)
+                    .addComponent(rbtnFetchPolicyDemand))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Placement policy", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -138,7 +164,7 @@ public class Central1 extends javax.swing.JFrame {
                 .addComponent(rbtnPlacementPolicyfirstA)
                 .addGap(36, 36, 36)
                 .addComponent(rbtnPlacementPoliciyNextA)
-                .addContainerGap(494, Short.MAX_VALUE))
+                .addContainerGap(526, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,17 +204,17 @@ public class Central1 extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(rbtnLRU)
-                .addGap(18, 18, 18)
+                .addGap(50, 50, 50)
                 .addComponent(rbtnFIFO)
-                .addGap(47, 47, 47)
+                .addGap(34, 34, 34)
+                .addComponent(rbtnLRU)
+                .addGap(27, 27, 27)
                 .addComponent(rbtnLFU)
-                .addGap(18, 18, 18)
-                .addComponent(rbtnMRU)
                 .addGap(26, 26, 26)
+                .addComponent(rbtnMRU)
+                .addGap(35, 35, 35)
                 .addComponent(rbtnSecondChance)
-                .addContainerGap(288, Short.MAX_VALUE))
+                .addContainerGap(339, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,6 +234,7 @@ public class Central1 extends javax.swing.JFrame {
         jLabel2.setText("Size:");
 
         buttonGroup4.add(rbtnFixed);
+        rbtnFixed.setSelected(true);
         rbtnFixed.setText("Fixed");
         rbtnFixed.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -216,10 +243,9 @@ public class Central1 extends javax.swing.JFrame {
         });
 
         buttonGroup4.add(rbtnVariable);
-        rbtnVariable.setSelected(true);
         rbtnVariable.setText("Variable");
 
-        jTextFieldResidentSet.setText("0");
+        jTextFieldResidentSet.setText("3");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -234,7 +260,7 @@ public class Central1 extends javax.swing.JFrame {
                 .addComponent(rbtnFixed)
                 .addGap(61, 61, 61)
                 .addComponent(rbtnVariable)
-                .addContainerGap(402, Short.MAX_VALUE))
+                .addContainerGap(413, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,7 +341,7 @@ public class Central1 extends javax.swing.JFrame {
 
         jLabel1.setText("Degree of Multiprogramming:");
 
-        jTextFieldMultiprogramming.setText("0");
+        jTextFieldMultiprogramming.setText("3");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -346,6 +372,12 @@ public class Central1 extends javax.swing.JFrame {
 
         jLabel5.setText("Tamaño de páginas:");
 
+        jTextFieldCantMemoriaFisica.setText("800");
+
+        jTextFieldCantMemoriaVirtual.setText("1200");
+
+        jTextFieldTamanoPagina.setText("25");
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
@@ -353,19 +385,15 @@ public class Central1 extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(116, 116, 116)
-                        .addComponent(jTextFieldCantMemoriaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5))
-                        .addGap(103, 103, 103)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextFieldTamanoPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextFieldCantMemoriaVirtual, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel3))
+                .addGap(103, 103, 103)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextFieldCantMemoriaFisica, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTamanoPagina, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldCantMemoriaVirtual, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(405, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,7 +409,7 @@ public class Central1 extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jTextFieldTamanoPagina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 10, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jLabel6.setFont(new java.awt.Font("MS Reference Sans Serif", 1, 18)); // NOI18N
@@ -452,7 +480,7 @@ public class Central1 extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(jLabel6)))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -497,23 +525,6 @@ public class Central1 extends javax.swing.JFrame {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         
-        //true (Demand) y false (Prepaging)
-        boolean fetchPolicy=false; 
-        //true (First available) y false(Next available) 
-        boolean placementPolicy=false;
-        // string con el nombre del algoritmo
-        String replacementPolicy="FIFO";
-        //Tama;o del resident set
-        int sizeResidentSet=0;
-        // true (Fixed) y false (Variable)
-        boolean residenSet=false;
-        //true (global) y false (local)
-        boolean scope=false;
-        // true (Demand) y false (Precleaning)
-        boolean cleaningPolicy=false;
-        // cant de procesos a cargar
-        int multiprogramming=0;
-
         if(rbtnFetchPolicyPrepaging.isSelected()){
             fetchPolicy= true;
         }
@@ -545,9 +556,13 @@ public class Central1 extends javax.swing.JFrame {
         
         sizeResidentSet = Integer.parseInt(jTextFieldResidentSet.getText());
         multiprogramming = Integer.parseInt(jTextFieldMultiprogramming.getText());
+        tamañoPagina = Integer.parseInt(jTextFieldTamanoPagina.getText());
+        tamañoMemoriaFisica = Integer.parseInt(jTextFieldCantMemoriaFisica.getText());
+        tamañoMemoriaVirtual = Integer.parseInt(jTextFieldCantMemoriaVirtual.getText());
         //(fetchPolicy , placementPolicy , replacementPolicy , sizeResidentSet , residenSet , scope , cleaningPolicy  , multiprogramming)
                 
         JFrameMamoria jFrameMemoria = new JFrameMamoria();
+        this.hide();
         jFrameMemoria.show();
           
         

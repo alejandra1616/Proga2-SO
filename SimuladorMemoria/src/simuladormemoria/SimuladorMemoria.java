@@ -20,7 +20,7 @@ public class SimuladorMemoria {
     public static void main(String[] args) {
         // TODO code application logic here
         Central1 c = new Central1();
-        //c.show();
+        c.show();
 
         
         

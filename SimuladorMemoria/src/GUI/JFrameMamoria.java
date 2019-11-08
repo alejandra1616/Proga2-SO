@@ -5,7 +5,34 @@
  */
 package GUI;
 
+import static GUI.Central1.fetchPolicy;
+import static GUI.Central1.multiprogramming;
+import static GUI.Central1.replacementPolicy;
+import static GUI.Central1.residenSet;
+import static GUI.Central1.scope;
+import static GUI.Central1.sizeResidentSet;
+import static GUI.Central1.tamañoMemoriaFisica;
+import static GUI.Central1.tamañoPagina;
+import static java.lang.Math.abs;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import simuladormemoria.Pagina;
+import simuladormemoria.Requi;
+import simuladormemoria.Simulacion;
+import static simuladormemoria.Simulacion.FIFO;
+import static simuladormemoria.Simulacion.LFU;
+import static simuladormemoria.Simulacion.LRU;
+import static simuladormemoria.Simulacion.MRU;
+import static simuladormemoria.Simulacion.Prepaging;
+import static simuladormemoria.Simulacion.SecondChance;
+import static simuladormemoria.Simulacion.TXTRequisiciones;
+import static simuladormemoria.Simulacion.cambioPagina;
+import static simuladormemoria.Simulacion.creaPagina;
+import static simuladormemoria.Simulacion.impresionListasVirtual;
+import static simuladormemoria.Simulacion.lista_requis;
+import static simuladormemoria.Simulacion.local;
+import static simuladormemoria.Simulacion.memoriaFisica;
+import static simuladormemoria.Simulacion.traerDeMemoriaVirtual;
 
 /**
  *
@@ -16,10 +43,16 @@ public class JFrameMamoria extends javax.swing.JFrame {
     /**
      * Creates new form JFrameMamoria
      */
+    
     public JFrameMamoria() {
         initComponents();
         llenarMemoriaVirtual();
         llenarMemoriaFisica();
+        Simulacion sim = new Simulacion();
+        creaPagina(tamañoPagina, multiprogramming);
+        Prepaging(sizeResidentSet); 
+        TXTRequisiciones();
+
     }
 
     /**
@@ -43,6 +76,8 @@ public class JFrameMamoria extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableMemoriaFisica = new javax.swing.JTable();
+        btnAyuda = new javax.swing.JButton();
+        btnNextRequest = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -70,20 +105,20 @@ public class JFrameMamoria extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addContainerGap(158, Short.MAX_VALUE))
+                .addContainerGap(142, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel5)
                 .addGap(14, 14, 14)
+                .addComponent(jLabel2)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel5)
+                .addGap(11, 11, 11)
                 .addComponent(jLabel3)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -119,15 +154,15 @@ public class JFrameMamoria extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Memoria Física"));
@@ -156,37 +191,59 @@ public class JFrameMamoria extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        btnAyuda.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnAyuda.setText("Ayuda");
+
+        btnNextRequest.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btnNextRequest.setText("Siguiente requisición");
+        btnNextRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextRequestActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(178, 178, 178)
+                        .addComponent(btnNextRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(92, 92, 92)
+                        .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(100, 100, 100)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAyuda, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNextRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
@@ -195,6 +252,15 @@ public class JFrameMamoria extends javax.swing.JFrame {
     private void jTableMemoriaVirtualComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTableMemoriaVirtualComponentAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableMemoriaVirtualComponentAdded
+
+    private void btnNextRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextRequestActionPerformed
+       if(!lista_requis.isEmpty()){
+        simulacionTotal();
+        System.out.println("Dele siguiente");
+       }else{
+           System.out.println("Termino");
+       }
+    }//GEN-LAST:event_btnNextRequestActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +295,85 @@ public class JFrameMamoria extends javax.swing.JFrame {
         });
     }
    
-   
+   public void reemplazo(Requi request){
+       System.out.println("Entro a reemplazo");
+       ArrayList<Pagina> lista = new ArrayList<Pagina>();
+       if(residenSet){
+           System.out.println("Es local");
+          lista= local(request);
+       }
+       else if(scope==false){
+           System.out.println("Es local");
+           lista= local(request);
+       }
+       else{
+           System.out.println("Es global");
+           lista=memoriaFisica;
+       }
+       
+       
+       switch(replacementPolicy){
+           case"FIFO":
+               cambioPagina(traerDeMemoriaVirtual(request),FIFO(lista)); 
+               System.out.println("Termino Fifo");
+               break;
+           case"LRU":
+               cambioPagina(traerDeMemoriaVirtual(request),LRU(lista));
+               System.out.println("Termino LRU");
+               break;
+           case "MRU":
+               cambioPagina(traerDeMemoriaVirtual(request),MRU(lista));
+               System.out.println("Termino MRU");
+               break;
+           case"LFU":
+               cambioPagina(traerDeMemoriaVirtual(request),LFU(lista)); 
+               System.out.println("Termino LFU");
+               break;
+           case"SecondChance":
+               cambioPagina(traerDeMemoriaVirtual(request),SecondChance(lista));
+               System.out.println("Termino SecondChance");
+               break;
+           default:
+               System.out.println("NO existe");
+               break;
+      
+       
+       }
+       System.out.println("Termino reemplzo");
+       
+       
+   }
+   public void simulacionTotal(){
+       System.out.println("--------------------------------------------------------------------------------------Entro SimulacionTotal");
+       Requi req = Simulacion.lista_requis.get(0);
+       impresionListasVirtual();
+         //Revisa si está cargada
+        System.out.println("Req " + req.getNumeroPagina());
+       if(memoriaFisica.indexOf(traerDeMemoriaVirtual(req)) != -1){
+           System.out.println("Mierda dentro: " + traerDeMemoriaVirtual(req).getId());
+           int pos = memoriaFisica.indexOf(traerDeMemoriaVirtual(req));
+           memoriaFisica.get(pos).setSucia(true);
+           System.out.println("ESTÁ ENSUCIANDO");
+        //Revisa si la memoria no está llena y es variable
+        }else if(memoriaFisica.size()!=(abs(tamañoMemoriaFisica/tamañoPagina)) && residenSet == false){
+           Pagina pagina = traerDeMemoriaVirtual(req);
+           memoriaFisica.add(pagina);
+           System.out.println("NO LLENA Y VARIABLE");
+        //Revisa si esta llena y es variable
+       }else if(memoriaFisica.size()==(abs(tamañoMemoriaFisica/tamañoPagina)) && residenSet == false){
+           System.out.println("Fisica llena y es variable");
+           Pagina pagina = traerDeMemoriaVirtual(req);
+           reemplazo(req);
+           System.out.println("LLENA Y VARIABLE");
+
+        }else if(residenSet){
+           System.out.println("Es fixed");
+           Pagina pagina = traerDeMemoriaVirtual(req);
+           reemplazo(req);
+           
+       }
+       Simulacion.lista_requis.remove(0);
+   }
    
    public void llenarMemoriaVirtual(){
     DefaultTableModel modelo = new DefaultTableModel();
@@ -266,6 +410,8 @@ public class JFrameMamoria extends javax.swing.JFrame {
    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAyuda;
+    private javax.swing.JButton btnNextRequest;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -22,6 +22,10 @@ public class Pagina {
 
     }
 
+    public Pagina() {
+    }
+    
+
     public int getContadorReferencia() {
         return contadorReferencia;
     }

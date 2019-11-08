@@ -5,8 +5,8 @@
  */
 package simuladormemoria;
 
+import static GUI.Central1.tamañoPagina;
 import static java.lang.Math.abs;
-import static simuladormemoria.Simulacion.tamañoPagina;
 
 /**
  *
@@ -16,11 +16,12 @@ public class Requi {
     
     private String proceso;
     private int direccion;
-    private int numeroPagina = abs(direccion/25);
+    private int numeroPagina;
 
     public Requi(String proceso, int direccion) {
         this.proceso = proceso;
         this.direccion = direccion;
+        numeroPagina = abs(this.direccion/tamañoPagina);
     }
 
     public String getProceso() {
@@ -38,5 +39,12 @@ public class Requi {
     public void setDireccion(int direccion) {
         this.direccion = direccion;
     }
-       
+
+    public int getNumeroPagina() {
+        return numeroPagina;
+    }
+
+    public void setNumeroPagina(int numeroPagina) {
+        this.numeroPagina = numeroPagina;
+    }      
 }
